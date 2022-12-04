@@ -1,0 +1,229 @@
+unit uVIewHistorico;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, bsSkinCtrls, bsSkinGrids, bsDBGrids,
+  Vcl.StdCtrls, Vcl.Mask, bsSkinBoxCtrls, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons, Vcl.ComCtrls;
+
+type
+  TfrmHistorico = class(TForm)
+    Label1: TLabel;
+    edPesquisa: TbsSkinEdit;
+    btnPesquisar: TbsSkinSpeedButton;
+    btnDeletar: TbsSkinSpeedButton;
+    cbPesquisa: TbsSkinComboBox;
+    Label2: TLabel;
+    tbhistorico: TDBGrid;
+    dsHistorico: TDataSource;
+    sqlHistorico: TFDQuery;
+    cbFilNome: TbsSkinComboBox;
+    Label3: TLabel;
+    cbOrgao: TbsSkinComboBox;
+    Label4: TLabel;
+    cbTipo: TbsSkinComboBox;
+    Label5: TLabel;
+    sqlHistoricoid: TIntegerField;
+    sqlHistoricocidade: TWideStringField;
+    sqlHistoricoorgao: TWideStringField;
+    sqlHistoricotipo: TWideStringField;
+    sqlHistoricodataenvio: TWideStringField;
+    sqlHistoricousuario: TWideStringField;
+    btnLimpaFiltro: TSpeedButton;
+    procedure btnDeletarClick(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure cbFilNomeChange(Sender: TObject);
+    procedure cbOrgaoChange(Sender: TObject);
+    procedure cbTipoChange(Sender: TObject);
+    procedure btnLimpaFiltroClick(Sender: TObject);
+    procedure tbhistoricoCellClick(Column: TColumn);
+  private
+    { Private declarations }
+
+  public
+    { Public declarations }
+  end;
+
+var
+  frmHistorico: TfrmHistorico;
+
+
+implementation
+
+{$R *.dfm}
+
+uses uHistoricoDao, uConexao;
+
+procedure TfrmHistorico.cbTipoChange(Sender: TObject);
+begin
+  dsHistorico.DataSet.Filtered := False;
+  dsHistorico.DataSet.Filter   := 'tipo = '+QuotedStr(cbTipo.Text);
+  dsHistorico.DataSet.Filtered   := True;
+  cbOrgao.ItemIndex   := -1;
+  cbFilNome.ItemIndex := -1;
+
+end;
+
+
+
+procedure TfrmHistorico.tbhistoricoCellClick(Column: TColumn);
+begin
+  if tbhistorico.Fields[0].Value = Null then
+  begin
+    ShowMessage('Nada no Histórico');
+  end;
+end;
+
+procedure TfrmHistorico.btnLimpaFiltroClick(Sender: TObject);
+begin
+  dsHistorico.DataSet.Filtered := False;
+  with sqlHistorico do
+  begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'+
+      'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario FROM tb_historico '+
+      'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id   ORDER BY dataenvio DESC');
+      Open;
+  end;
+  cbFilNome.ItemIndex := -1;
+  cbOrgao.ItemIndex   := -1;
+  cbTipo.ItemIndex    := -1;
+
+
+
+end;
+
+procedure TfrmHistorico.btnDeletarClick(Sender: TObject);
+begin
+  if Application.MessageBox('Deseja Realmente Deletar?','Atenção!', MB_OK+MB_OKCANCEL)=1 then
+  uHistoricoDao.HistoricoDao.deletarHistorico(tbhistorico.Fields[0].Value);
+  ShowMessage('Histórico Deletado com Sucesso')
+  tbhistorico.DataSource.DataSet.Refresh;
+end;
+
+procedure TfrmHistorico.btnPesquisarClick(Sender: TObject);
+var
+i : Integer;
+begin
+  if cbPesquisa.ItemIndex = 0 then
+  begin
+    with sqlHistorico do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'+
+      'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario FROM tb_historico '+
+      'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id');
+      SQL.Add('WHERE orgao LIKE ''%'+edPesquisa.Text+'%'' ORDER BY dataenvio DESC');
+    end;
+
+  end
+  else if cbPesquisa.ItemIndex = 1 then
+  begin
+    with sqlHistorico do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'+
+      'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario FROM tb_historico '+
+      'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id');
+      SQL.Add('WHERE cidade LIKE ''%'+edPesquisa.Text+'%''  ORDER BY dataenvio DESC');
+    end;
+
+  end
+  else if cbPesquisa.ItemIndex = 2 then
+  begin
+    with sqlHistorico do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'+
+      'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario FROM tb_historico '+
+      'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id');
+      SQL.Add('WHERE dataenvio LIKE ''%'+edPesquisa.Text+'%''  ORDER BY dataenvio DESC');
+    end;
+
+  end
+  else if cbPesquisa.ItemIndex = 3 then
+  begin
+     with sqlHistorico do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'+
+      'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario FROM tb_historico '+
+      'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id');
+      SQL.Add('WHERE tipo LIKE ''%'+edPesquisa.Text+'%''  ORDER BY dataenvio DESC');
+    end;
+
+  end
+  else if cbPesquisa.ItemIndex = 4 then
+  begin
+     with sqlHistorico do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'+
+      'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario FROM tb_historico '+
+      'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id');
+      SQL.Add('WHERE usuario LIKE ''%'+edPesquisa.Text+'%''  ORDER BY dataenvio DESC');
+    end
+
+  end;
+
+  sqlHistorico.Open;
+
+  sqlHistorico.First;
+  sqlHistorico.FetchAll;
+
+
+end;
+
+
+procedure TfrmHistorico.cbFilNomeChange(Sender: TObject);
+begin
+  dsHistorico.DataSet.Filtered := False;
+
+  if cbFilNome.ItemIndex = 0 then
+  begin
+    sqlHistorico.Close;
+    sqlHistorico.Open('SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'+
+    'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario FROM tb_historico '+
+    'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id '+
+    'ORDER BY tb_historico.datahoraenvio ASC');
+  end
+  else if cbFilNome.ItemIndex = 1 then
+  begin
+     sqlHistorico.Close;
+    sqlHistorico.Open('SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'+
+    'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario FROM tb_historico '+
+    'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id '+
+    'ORDER BY tb_historico.datahoraenvio DESC');
+    dsHistorico.DataSet.Filtered := True;
+  end
+  else
+  begin
+    dsHistorico.DataSet.Filter    := 'cidade LIKE '+QuotedStr(cbFilNome.Text+'%');
+    dsHistorico.DataSet.Filtered  := True;
+
+  end;
+  cbOrgao.ItemIndex := -1;
+  cbTipo.ItemIndex  := -1;
+end;
+
+procedure TfrmHistorico.cbOrgaoChange(Sender: TObject);
+begin
+    dsHistorico.DataSet.Filtered := False;
+    dsHistorico.DataSet.Filter   := 'orgao = '+QuotedStr(cbOrgao.Text);
+    dsHistorico.DataSet.Filtered := True;
+    cbFilNome.ItemIndex          := -1;
+    cbTipo.ItemIndex            := -1;
+end;
+
+end.

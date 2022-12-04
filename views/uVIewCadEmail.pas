@@ -1,0 +1,88 @@
+unit uVIewCadEmail;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, bsSkinCtrls, Vcl.StdCtrls, Vcl.Mask,
+  bsSkinBoxCtrls, bsdbctrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls, uVIewEnvioRelatorio;
+
+type
+  TfrmCadEmail = class(TForm)
+    Label1: TLabel;
+    cbCidade: TbsSkinDBLookupComboBox;
+    cbOrgao: TbsSkinComboBox;
+    edEmail: TbsSkinEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    btnCadastrar: TbsSkinSpeedButton;
+    dsConsulta: TDataSource;
+    sqlChecarEmail: TFDQuery;
+    sqlConsulta: TFDQuery;
+    procedure btnCadastrarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadEmail: TfrmCadEmail;
+
+implementation
+
+{$R *.dfm}
+
+uses uConexao, uEmailDao, uViewGerEmail;
+
+procedure TfrmCadEmail.btnCadastrarClick(Sender: TObject);
+begin
+  if edEmail.Text<>'' then
+  begin
+    sqlChecarEmail.Close;
+    sqlChecarEmail.Params[0].AsInteger := cbCidade.KeyValue;
+    sqlChecarEmail.Params[1].AsString := cbOrgao.Text;
+
+    sqlChecarEmail.Open;
+
+    if (sqlChecarEmail.IsEmpty()= True) then
+    begin
+    if edEmail.Text<>'' then
+    begin
+    try
+      uEmailDao.EmailDao.inserirEmail(cbCidade.KeyValue, cbOrgao.Text, edEmail.Text);
+      uViewGerEmail.frmGerEmail.tbemails.DataSource.DataSet.Refresh;
+      uVIewEnvioRelatorio.frmEnvioEmail.dsCidades.DataSet.Refresh;
+      ShowMessage('Email Cadastrado com Sucesso');
+    Except on E:Exception do
+    begin
+      ShowMessage(E.Message);
+    end;
+
+    end;
+
+    end
+    else
+    begin
+    showMessage('Email Não Preenchido!');
+    end;
+
+    end
+    else
+    begin
+    ShowMessage('Cidade e Orgão com Email já Cadastrado!');
+    end;
+  end
+  else
+  begin
+    ShowMessage('Campo não preenchido');
+  end;
+
+
+end;
+
+end.

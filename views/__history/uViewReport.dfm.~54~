@@ -1,0 +1,242 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 487
+  ClientWidth = 815
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Relatorio: TRLReport
+    Left = 0
+    Top = -8
+    Width = 794
+    Height = 1123
+    DataSource = frmGerarRelatorio.dsRelatorio
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    object Cabecalho: TRLBand
+      Left = 38
+      Top = 38
+      Width = 718
+      Height = 35
+      object RLSystemInfo1: TRLSystemInfo
+        Left = 0
+        Top = 0
+        Width = 39
+        Height = 16
+        Align = faLeftOnly
+        Text = ''
+      end
+      object RLSystemInfo2: TRLSystemInfo
+        Left = 679
+        Top = 0
+        Width = 39
+        Height = 35
+        Align = faRight
+        Info = itHour
+        Text = ''
+      end
+      object RLLabel1: TRLLabel
+        Left = 253
+        Top = 0
+        Width = 172
+        Height = 21
+        Align = faCenterTop
+        Caption = 'ITARGET TECNOLOGIA'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object RLSystemInfo3: TRLSystemInfo
+        Left = -8
+        Top = -8
+        Width = 39
+        Height = 16
+        Text = ''
+      end
+    end
+    object Titulo: TRLBand
+      Left = 38
+      Top = 73
+      Width = 718
+      Height = 56
+      object RLLabel2: TRLLabel
+        Left = 240
+        Top = 3
+        Width = 200
+        Height = 17
+        Caption = 'Relat'#243'rios do Envio de Relat'#243'rios'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object RLLabel3: TRLLabel
+        Left = -4
+        Top = 37
+        Width = 133
+        Height = 17
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = False
+        Borders.DrawRight = True
+        Borders.DrawBottom = False
+        Caption = 'Cidade'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object RLLabel4: TRLLabel
+        Left = 128
+        Top = 37
+        Width = 177
+        Height = 17
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = False
+        Borders.DrawRight = True
+        Borders.DrawBottom = False
+        Caption = 'Org'#227'o'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object RLLabel5: TRLLabel
+        Left = 456
+        Top = 37
+        Width = 113
+        Height = 16
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = False
+        Borders.DrawRight = True
+        Borders.DrawBottom = False
+        Caption = 'Data do Envio'
+      end
+      object RLLabel6: TRLLabel
+        Left = 297
+        Top = 37
+        Width = 160
+        Height = 17
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = False
+        Borders.DrawRight = True
+        Borders.DrawBottom = False
+        Caption = 'Tipo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object RLLabel7: TRLLabel
+        Left = 568
+        Top = 37
+        Width = 147
+        Height = 16
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = False
+        Borders.DrawRight = True
+        Borders.DrawBottom = False
+        Caption = 'Usu'#225'rio'
+      end
+    end
+    object RLBand1: TRLBand
+      Left = 38
+      Top = 129
+      Width = 718
+      Height = 32
+      object Cidade: TRLDBText
+        Left = 0
+        Top = 6
+        Width = 43
+        Height = 17
+        DataField = 'cidade'
+        DataSource = frmGerarRelatorio.dsRelatorio
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        Text = ''
+      end
+      object RLDBText1: TRLDBText
+        Left = 128
+        Top = 6
+        Width = 40
+        Height = 17
+        DataField = 'orgao'
+        DataSource = frmGerarRelatorio.dsRelatorio
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        Text = ''
+      end
+      object RLDBText2: TRLDBText
+        Left = 297
+        Top = 6
+        Width = 25
+        Height = 16
+        DataField = 'tipo'
+        DataSource = frmGerarRelatorio.dsRelatorio
+        Text = ''
+      end
+      object RLDBText3: TRLDBText
+        Left = 456
+        Top = 6
+        Width = 58
+        Height = 16
+        DataField = 'dataenvio'
+        DataSource = frmGerarRelatorio.dsRelatorio
+        Text = ''
+      end
+      object RLDBText4: TRLDBText
+        Left = 568
+        Top = 6
+        Width = 46
+        Height = 16
+        DataField = 'usuario'
+        DataSource = frmGerarRelatorio.dsRelatorio
+        Text = ''
+      end
+    end
+  end
+  object RLSystemInfo4: TRLSystemInfo
+    Left = 8
+    Top = 11
+    Width = 72
+    Height = 13
+    Align = faLeftTop
+    Info = itPageNumber
+    Text = ''
+    Transparent = False
+  end
+end

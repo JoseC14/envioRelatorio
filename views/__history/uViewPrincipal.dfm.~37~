@@ -1,0 +1,72 @@
+object frmPrincipal: TfrmPrincipal
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize, biHelp]
+  BorderStyle = bsSingle
+  Caption = 'Envio de Relat'#243'rios'
+  ClientHeight = 505
+  ClientWidth = 838
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = bsSkinMainMenu1
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  Scaled = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pTelaInterna: TPanel
+    Left = 0
+    Top = 0
+    Width = 844
+    Height = 505
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+  end
+  object bsSkinMainMenu1: TbsSkinMainMenu
+    Left = 416
+    Top = 152
+    object EnviarEmail1: TMenuItem
+      Caption = 'Enviar Relat'#243'rio'
+      OnClick = EnviarEmail1Click
+    end
+    object Gerenciar1: TMenuItem
+      Caption = 'Cadastrar'
+      object CIdades1: TMenuItem
+        Caption = 'CIdades'
+        OnClick = CIdades1Click
+      end
+      object Emails1: TMenuItem
+        Caption = 'E-mails'
+        OnClick = Emails1Click
+      end
+    end
+    object Gerenciar2: TMenuItem
+      Caption = 'Gerenciar'
+      object Cidade1: TMenuItem
+        Caption = 'Cidades'
+        OnClick = Cidade1Click
+      end
+      object Emails2: TMenuItem
+        Caption = 'E-mails'
+        OnClick = Emails2Click
+      end
+    end
+    object Histrico1: TMenuItem
+      Caption = 'Hist'#243'rico'
+      OnClick = Histrico1Click
+    end
+    object Relatrios1: TMenuItem
+      Caption = 'Relat'#243'rios'
+      OnClick = Relatrios1Click
+    end
+    object Logout1: TMenuItem
+      Caption = 'Logout'
+    end
+  end
+end

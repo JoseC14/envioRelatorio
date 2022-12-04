@@ -1,0 +1,86 @@
+object frmLogin: TfrmLogin
+  Left = 0
+  Top = 0
+  Caption = 'Login'
+  ClientHeight = 356
+  ClientWidth = 343
+  Color = clSkyBlue
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label3: TLabel
+    Left = 144
+    Top = 104
+    Width = 40
+    Height = 13
+    Caption = 'Usu'#225'rio'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 144
+    Top = 150
+    Width = 32
+    Height = 13
+    Caption = 'Senha'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 120
+    Top = 224
+    Width = 89
+    Height = 38
+    Caption = 'Logar'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    OnClick = SpeedButton1Click
+  end
+  object Label1: TLabel
+    Left = 136
+    Top = 310
+    Width = 64
+    Height = 13
+    Cursor = crHandPoint
+    Caption = 'Cadastrar-se'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    OnClick = Label1Click
+  end
+  object edUser: TEdit
+    Left = 54
+    Top = 123
+    Width = 233
+    Height = 21
+    TabOrder = 0
+  end
+  object edSenha: TEdit
+    Left = 54
+    Top = 169
+    Width = 233
+    Height = 21
+    TabOrder = 1
+  end
+end

@@ -1,0 +1,458 @@
+object frmGerarRelatorio: TfrmGerarRelatorio
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'frmGerarRelatorio'
+  ClientHeight = 416
+  ClientWidth = 756
+  Color = clSkyBlue
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label3: TLabel
+    Left = 54
+    Top = 64
+    Width = 14
+    Height = 13
+    Caption = 'De'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 174
+    Top = 64
+    Width = 17
+    Height = 13
+    Caption = 'At'#233
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 278
+    Top = 64
+    Width = 40
+    Height = 13
+    Caption = 'Usu'#225'rio'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 476
+    Top = 64
+    Width = 23
+    Height = 13
+    Caption = 'Tipo'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object btnRelatorio: TbsSkinSpeedButton
+    Left = 505
+    Top = 168
+    Width = 169
+    Height = 41
+    HintImageIndex = 0
+    SkinDataName = 'toolbutton'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 13
+    DefaultFont.Name = 'Tahoma'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 0
+    UseSkinFont = True
+    CheckedMode = False
+    UseSkinSize = True
+    UseSkinFontColor = True
+    WidthWithCaption = 0
+    WidthWithoutCaption = 0
+    ImageIndex = 0
+    RepeatMode = False
+    RepeatInterval = 100
+    Transparent = False
+    Flat = False
+    AllowAllUp = False
+    Down = False
+    GroupIndex = 0
+    Caption = ' Gerar Relat'#243'rio'
+    ShowCaption = True
+    NumGlyphs = 1
+    Spacing = 1
+    OnClick = btnRelatorioClick
+  end
+  object Label5: TLabel
+    Left = 52
+    Top = 104
+    Width = 36
+    Height = 13
+    Caption = 'Cidade'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 256
+    Top = 104
+    Width = 33
+    Height = 13
+    Caption = 'Org'#227'o'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object edDe: TMaskEdit
+    Left = 74
+    Top = 61
+    Width = 63
+    Height = 21
+    EditMask = '!99/99/9999;1;_'
+    MaxLength = 10
+    TabOrder = 0
+    Text = '  /  /    '
+  end
+  object edAte: TMaskEdit
+    Left = 197
+    Top = 61
+    Width = 63
+    Height = 21
+    EditMask = '!99/99/9999;1;_'
+    MaxLength = 10
+    TabOrder = 1
+    Text = '  /  /    '
+  end
+  object cbUsuario: TbsSkinDBLookupComboBox
+    Left = 324
+    Top = 61
+    Width = 141
+    Height = 20
+    Hint = 'Selecione a Cidade'
+    HintTitle = 'Selecione'
+    HintImageIndex = 0
+    TabOrder = 2
+    SkinDataName = 'combobox'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 13
+    DefaultFont.Name = 'Tahoma'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 20
+    UseSkinFont = True
+    DefaultColor = clWindow
+    ListBoxDefaultItemHeight = 20
+    ListBoxUseSkinFont = True
+    ListBoxUseSkinItemHeight = True
+    KeyField = 'id'
+    ListField = 'usuario'
+    ListSource = dsUsuario
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object cbTIpo: TbsSkinComboBox
+    Left = 505
+    Top = 62
+    Width = 128
+    Height = 20
+    HintImageIndex = 0
+    TabOrder = 3
+    SkinDataName = 'combobox'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 13
+    DefaultFont.Name = 'Tahoma'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 0
+    UseSkinFont = True
+    UseSkinSize = True
+    ToolButtonStyle = False
+    AlphaBlend = False
+    AlphaBlendValue = 0
+    AlphaBlendAnimation = False
+    ListBoxCaptionMode = False
+    ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+    ListBoxDefaultFont.Color = clWindowText
+    ListBoxDefaultFont.Height = 13
+    ListBoxDefaultFont.Name = 'Tahoma'
+    ListBoxDefaultFont.Style = []
+    ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+    ListBoxDefaultCaptionFont.Color = clWindowText
+    ListBoxDefaultCaptionFont.Height = 13
+    ListBoxDefaultCaptionFont.Name = 'Tahoma'
+    ListBoxDefaultCaptionFont.Style = []
+    ListBoxDefaultItemHeight = 20
+    ListBoxCaptionAlignment = taLeftJustify
+    ListBoxUseSkinFont = True
+    ListBoxUseSkinItemHeight = True
+    ListBoxWidth = 0
+    HideSelection = True
+    AutoComplete = True
+    ImageIndex = -1
+    CharCase = ecNormal
+    DefaultColor = clWindow
+    Items.Strings = (
+      'Ponto'
+      'Sincroniza'#231#227'o'
+      'Listagem')
+    ItemIndex = -1
+    DropDownCount = 8
+    HorizontalExtent = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Sorted = False
+    Style = bscbFixedStyle
+  end
+  object cbCidades: TbsSkinDBLookupComboBox
+    Left = 94
+    Top = 99
+    Width = 141
+    Height = 20
+    Hint = 'Selecione a Cidade'
+    HintTitle = 'Selecione'
+    HintImageIndex = 0
+    TabOrder = 4
+    SkinDataName = 'combobox'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 13
+    DefaultFont.Name = 'Tahoma'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 20
+    UseSkinFont = True
+    DefaultColor = clWindow
+    ListBoxDefaultItemHeight = 20
+    ListBoxUseSkinFont = True
+    ListBoxUseSkinItemHeight = True
+    KeyField = 'id'
+    ListField = 'nome'
+    ListSource = dsConsulta
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object cbOrgao: TbsSkinComboBox
+    Left = 295
+    Top = 100
+    Width = 209
+    Height = 19
+    Hint = 'Selecione'
+    HintTitle = 'Selecione'
+    HintImageIndex = 0
+    TabOrder = 5
+    SkinDataName = 'combobox'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 13
+    DefaultFont.Name = 'Tahoma'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 0
+    UseSkinFont = True
+    UseSkinSize = True
+    ToolButtonStyle = False
+    AlphaBlend = False
+    AlphaBlendValue = 0
+    AlphaBlendAnimation = False
+    ListBoxCaptionMode = False
+    ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+    ListBoxDefaultFont.Color = clWindowText
+    ListBoxDefaultFont.Height = 13
+    ListBoxDefaultFont.Name = 'Tahoma'
+    ListBoxDefaultFont.Style = []
+    ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+    ListBoxDefaultCaptionFont.Color = clWindowText
+    ListBoxDefaultCaptionFont.Height = 13
+    ListBoxDefaultCaptionFont.Name = 'Tahoma'
+    ListBoxDefaultCaptionFont.Style = []
+    ListBoxDefaultItemHeight = 20
+    ListBoxCaptionAlignment = taLeftJustify
+    ListBoxUseSkinFont = True
+    ListBoxUseSkinItemHeight = True
+    ListBoxWidth = 0
+    HideSelection = True
+    AutoComplete = True
+    ImageIndex = -1
+    ShowHint = True
+    CharCase = ecNormal
+    DefaultColor = clWindow
+    Text = 'Camara Municipal'
+    Items.Strings = (
+      'Camara Municipal'
+      'Comutran'
+      'Controladoria Geral'
+      'Gabinete do Prefeito'
+      'IGC'
+      'SAAE'
+      'Secretaria de Agricultura'
+      'Secretaria de Administracao'
+      'Secretaria Assistencia Social'
+      'Secretaria de Cultura'
+      'Secretaria de Educacao'
+      'Secretaria de Esporte'
+      'Secretaria de Infra'
+      'Secretaria de Meio Ambiente'
+      'Secretaria de Obras'
+      'Secretaria de Saude'
+      'Secretaria de Seguranca Publica'
+      'Procuradoria Geral')
+    ItemIndex = -1
+    DropDownCount = 8
+    HorizontalExtent = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Sorted = False
+    Style = bscbFixedStyle
+  end
+  object sqlUsuario: TFDQuery
+    Active = True
+    Connection = Conexao.Conexao
+    SQL.Strings = (
+      'SELECT * FROM tb_user')
+    Left = 176
+    Top = 368
+    object sqlUsuarioid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object sqlUsuariousuario: TWideStringField
+      FieldName = 'usuario'
+      Origin = 'usuario'
+      Size = 255
+    end
+    object sqlUsuariosenha: TWideStringField
+      FieldName = 'senha'
+      Origin = 'senha'
+      Size = 255
+    end
+    object sqlUsuarioemail: TWideStringField
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 255
+    end
+    object sqlUsuariosenhaemail: TWideStringField
+      FieldName = 'senhaemail'
+      Origin = 'senhaemail'
+      Size = 255
+    end
+  end
+  object dsUsuario: TDataSource
+    DataSet = sqlUsuario
+    Left = 408
+    Top = 368
+  end
+  object sqlConsulta: TFDQuery
+    Active = True
+    Connection = Conexao.Conexao
+    SQL.Strings = (
+      'SELECT * FROM tb_cidade')
+    Left = 240
+    Top = 368
+  end
+  object dsConsulta: TDataSource
+    DataSet = sqlConsulta
+    Left = 464
+    Top = 368
+  end
+  object sqlRelatorio: TFDQuery
+    Active = True
+    Connection = Conexao.Conexao
+    SQL.Strings = (
+      'SELECT tb_historico.id,tb_historico.cidade,tb_historico.orgao,'
+      
+        'tb_historico.tipo,tb_historico.dataenvio,tb_user.usuario, tb_use' +
+        'r.id FROM tb_historico'
+      
+        'INNER JOIN tb_user ON tb_historico.idusuario = tb_user.id  WHERE' +
+        ' dataenvio '
+      'BETWEEN :datainicio  AND :datafim')
+    Left = 104
+    Top = 368
+    ParamData = <
+      item
+        Name = 'DATAINICIO'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'DATAFIM'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+    object sqlRelatorioid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object sqlRelatoriocidade: TWideStringField
+      FieldName = 'cidade'
+      Origin = 'cidade'
+      Size = 255
+    end
+    object sqlRelatorioorgao: TWideStringField
+      FieldName = 'orgao'
+      Origin = 'orgao'
+      Size = 255
+    end
+    object sqlRelatoriotipo: TWideStringField
+      FieldName = 'tipo'
+      Origin = 'tipo'
+      Size = 255
+    end
+    object sqlRelatoriodataenvio: TWideStringField
+      FieldName = 'dataenvio'
+      Origin = 'dataenvio'
+      Size = 255
+    end
+    object sqlRelatoriousuario: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'usuario'
+      Origin = 'usuario'
+      Size = 255
+    end
+    object sqlRelatorioid_1: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_1'
+      Origin = 'id'
+    end
+  end
+  object dsRelatorio: TDataSource
+    DataSet = sqlRelatorio
+    Left = 344
+    Top = 368
+  end
+end

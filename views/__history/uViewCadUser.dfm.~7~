@@ -1,0 +1,127 @@
+object frmCadUser: TfrmCadUser
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'frmCadUser'
+  ClientHeight = 341
+  ClientWidth = 567
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label12: TLabel
+    Left = 264
+    Top = 19
+    Width = 40
+    Height = 13
+    Caption = 'Usu'#225'rio'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label11: TLabel
+    Left = 264
+    Top = 73
+    Width = 32
+    Height = 13
+    Caption = 'Senha'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label10: TLabel
+    Left = 238
+    Top = 135
+    Width = 98
+    Height = 13
+    Caption = 'Endere'#231'o de E-mail'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label8: TLabel
+    Left = 206
+    Top = 189
+    Width = 150
+    Height = 13
+    Caption = 'Senha do Endere'#231'o de E-mail'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 227
+    Top = 247
+    Width = 129
+    Height = 38
+    Caption = 'Cadastrar'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    OnClick = SpeedButton1Click
+  end
+  object Label1: TLabel
+    Left = 206
+    Top = 301
+    Width = 169
+    Height = 13
+    Cursor = crHandPoint
+    Caption = 'Como criar uma senha de e-mail?'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    OnClick = Label1Click
+  end
+  object edUser: TEdit
+    Left = 176
+    Top = 38
+    Width = 233
+    Height = 21
+    TabOrder = 0
+  end
+  object edSenha: TEdit
+    Left = 176
+    Top = 92
+    Width = 233
+    Height = 21
+    TabOrder = 1
+  end
+  object edEmail: TEdit
+    Left = 176
+    Top = 154
+    Width = 233
+    Height = 21
+    TabOrder = 2
+  end
+  object edSenhaEmail: TEdit
+    Left = 176
+    Top = 208
+    Width = 233
+    Height = 21
+    TabOrder = 3
+  end
+end

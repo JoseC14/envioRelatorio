@@ -1,0 +1,52 @@
+unit uViewCadUser;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls;
+
+type
+  TfrmCadUser = class(TForm)
+    edUser: TEdit;
+    Label12: TLabel;
+    Label11: TLabel;
+    edSenha: TEdit;
+    Label10: TLabel;
+    edEmail: TEdit;
+    Label8: TLabel;
+    edSenhaEmail: TEdit;
+    SpeedButton1: TSpeedButton;
+    Label1: TLabel;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure Label1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadUser: TfrmCadUser;
+
+implementation
+
+{$R *.dfm}
+
+uses uUserDao;
+
+procedure TfrmCadUser.Label1Click(Sender: TObject);
+begin
+ ShowMessage('Vá para o gerenciamento da sua conta google, clique em Segurança,'+
+ ' depois faça a verificação em duas etapas, depois de feito isso clique em senhas'+
+ ' de app e gere uma nova senha. Copie cola essa senha no campo de senha de endereço de email');
+end;
+
+procedure TfrmCadUser.SpeedButton1Click(Sender: TObject);
+begin
+  uUserDao.userDao.inserirUsuario(edUser.Text,edSenha.Text,edEmail.Text,edSenhaEmail.Text);
+  ShowMessage('Usuario Cadastrado!');
+  Close;
+end;
+
+end.

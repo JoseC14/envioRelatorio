@@ -1,0 +1,167 @@
+unit uViewGerEmail;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, bsSkinCtrls, bsSkinGrids, bsDBGrids,
+  Vcl.StdCtrls, Vcl.Mask, bsSkinBoxCtrls, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmGerEmail = class(TForm)
+    edPesquisa: TbsSkinEdit;
+    Label1: TLabel;
+    btnPesquisar: TbsSkinSpeedButton;
+    btnAlterar: TbsSkinSpeedButton;
+    btnDeletar: TbsSkinSpeedButton;
+    edMails: TbsSkinEdit;
+    dsConsulta: TDataSource;
+    tbemails: TDBGrid;
+    cbPesquisa: TbsSkinComboBox;
+    Label2: TLabel;
+    sqlConsulta: TFDQuery;
+    sqlConsultaid: TIntegerField;
+    sqlConsultanome: TWideStringField;
+    sqlConsultaorgao: TWideStringField;
+    sqlConsultaemail: TWideStringField;
+    cbFilNome: TbsSkinComboBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    cbOrgao: TbsSkinComboBox;
+    btnLimpaFiltro: TbsSkinSpeedButton;
+    procedure tbemailsCellClick(Column: TColumn);
+    procedure FormCreate(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure btnDeletarClick(Sender: TObject);
+    procedure cbFilNomeChange(Sender: TObject);
+    procedure cbOrgaoChange(Sender: TObject);
+    procedure btnLimpaFiltroClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmGerEmail: TfrmGerEmail;
+
+implementation
+
+{$R *.dfm}
+
+uses uConexao, uEmailDao;
+
+procedure TfrmGerEmail.btnAlterarClick(Sender: TObject);
+begin
+  if edMails.Text<>'' then
+  begin
+    uEmailDao.EmailDao.alterarEmail(edMails.Text, tbemails.Fields[0].Value);
+    ShowMessage('Email Alterado com Sucesso');
+    tbemails.DataSource.DataSet.Refresh;
+  end
+  else
+  begin
+    ShowMessage('Email não selecionado');
+  end;
+
+end;
+
+procedure TfrmGerEmail.btnDeletarClick(Sender: TObject);
+begin
+  if Application.MessageBox('Deseja Realmente Deletar?','Atenção!', MB_OK+MB_OKCANCEL)=1 then
+  
+  uEmailDao.EmailDao.deletarEmail(tbemails.Fields[0].Value);
+  tbemails.DataSource.DataSet.Refresh;
+end;
+
+procedure TfrmGerEmail.btnLimpaFiltroClick(Sender: TObject);
+begin
+  dsConsulta.DataSet.Filtered := False;
+  cbFilNome.ItemIndex := -1;
+  cbOrgao.ItemIndex   := -1;
+end;
+
+procedure TfrmGerEmail.btnPesquisarClick(Sender: TObject);
+begin
+ if cbPesquisa.ItemIndex = 0 then
+ begin
+   sqlConsulta.Open('SELECT tb_mails.id, tb_cidade.nome, tb_mails.orgao, tb_mails.email'+
+   ' FROM tb_mails INNER JOIN tb_cidade ON tb_cidade.id = tb_mails.idcidade WHERE'+
+   ' tb_mails.email LIKE ''%'+edPesquisa.Text+'%''');
+ end
+ else if cbPesquisa.ItemIndex = 1 then
+ begin
+    sqlConsulta.Open('SELECT tb_mails.id, tb_cidade.nome, tb_mails.orgao, tb_mails.email'+
+   ' FROM tb_mails INNER JOIN tb_cidade ON tb_cidade.id = tb_mails.idcidade WHERE'+
+   ' tb_mails.orgao LIKE ''%'+edPesquisa.Text+'%''');
+ end
+ else if cbPesquisa.ItemIndex = 2 then
+ begin
+    sqlConsulta.Open('SELECT tb_mails.id, tb_cidade.nome, tb_mails.orgao, tb_mails.email'+
+   ' FROM tb_mails INNER JOIN tb_cidade ON tb_cidade.id = tb_mails.idcidade WHERE'+
+   ' tb_cidade.nome LIKE ''%'+edPesquisa.Text+'%''');
+ end;
+
+
+end;
+
+procedure TfrmGerEmail.cbFilNomeChange(Sender: TObject);
+begin
+  dsConsulta.DataSet.Filtered := False;
+  if cbFilNome.ItemIndex = 0 then
+  begin
+    sqlConsulta.Close;
+    sqlConsulta.Open('SELECT tb_mails.id, tb_cidade.nome, tb_mails.orgao,'+
+    'tb_mails.email FROM tb_mails INNER JOIN tb_cidade ON '+
+    'tb_cidade.id = tb_mails.idcidade '+
+    'ORDER BY tb_cidade.nome ASC');
+
+  end
+  else if cbFilNome.ItemIndex = 1 then
+  begin
+    sqlConsulta.Close;
+    sqlConsulta.Open('SELECT tb_mails.id, tb_cidade.nome, tb_mails.orgao,'+
+    'tb_mails.email FROM tb_mails INNER JOIN tb_cidade ON '+
+    'tb_cidade.id = tb_mails.idcidade '+
+    ' ORDER BY tb_cidade.nome DESC');
+  end
+  else
+  begin
+    dsConsulta.DataSet.Filtered  := False;
+    dsConsulta.DataSet.Filter    := 'nome LIKE '+QuotedStr(cbFilNome.Text+'%');
+    dsConsulta.DataSet.Filtered  := True;
+
+  end;
+
+  dsConsulta.DataSet.Filtered := True;
+  cbOrgao.ItemIndex := -1;
+end;
+
+procedure TfrmGerEmail.cbOrgaoChange(Sender: TObject);
+begin
+    dsConsulta.DataSet.Filtered := False;
+    dsConsulta.DataSet.Filter   := 'orgao = '+QuotedStr(cbOrgao.Text);
+    dsConsulta.DataSet.Filtered := True;
+    cbFilNome.ItemIndex         := -1;
+
+
+
+
+end;
+
+procedure TfrmGerEmail.FormCreate(Sender: TObject);
+begin
+  edMails.Enabled := False;
+end;
+
+procedure TfrmGerEmail.tbemailsCellClick(Column: TColumn);
+begin
+  edMails.Text    := tbemails.Fields[3].Value;
+  edMails.Enabled := True;
+end;
+
+end.
