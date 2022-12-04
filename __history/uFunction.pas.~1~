@@ -1,0 +1,11 @@
+unit uFunction;
+
+interface
+   type
+    TFunction = class
+      public
+      function RemoveSpecialChars(const str: string): string;
+    end;
+implementation
+
+end.

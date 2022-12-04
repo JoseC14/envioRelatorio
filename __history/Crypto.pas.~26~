@@ -1,0 +1,19 @@
+unit Crypto;
+
+interface
+
+  type
+  TCrypto = class
+    private
+
+    public
+    function AsciiToInt(Caracter: Char): Integer;
+    Function Criptografa(texto:string;chave:integer):String;
+    Function DesCriptografa(texto:string;chave:integer):String;
+  end;
+implementation
+
+
+{ TCrypto }
+
+end.

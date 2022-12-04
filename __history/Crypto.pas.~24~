@@ -1,0 +1,17 @@
+unit Crypto;
+
+interface
+
+  type
+  TCrypto = class
+    private
+
+    public
+
+  end;
+implementation
+
+
+{ TCrypto }
+
+end.

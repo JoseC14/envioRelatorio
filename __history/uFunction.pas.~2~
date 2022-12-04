@@ -1,0 +1,23 @@
+unit uFunction;
+
+interface
+   type
+    TFunction = class
+      public
+      function RemoveSpecialChars(const str: string): string;
+    end;
+implementation
+
+{ TFunction }
+
+function TFunction.RemoveSpecialChars(const str: string): string;
+const
+  InvalidChars : set of char =
+    [',','.','/','!','@','#','$','%','^','&','*','''','"',';','_','(',')',':','|','[',']'];
+var
+  i, Count: Integer;
+begin
+
+end;
+
+end.

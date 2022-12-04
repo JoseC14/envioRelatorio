@@ -1,0 +1,12 @@
+unit Crypto;
+
+interface
+
+  end;
+implementation
+
+
+{ TCrypto }
+
+
+end.
