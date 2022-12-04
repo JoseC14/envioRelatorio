@@ -1,0 +1,59 @@
+unit uHistoricoDao;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  THistoricoDao = class(TDataModule)
+    sqlInserir: TFDQuery;
+    sqlDeletar: TFDQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure inserirHistorico(cidade, orgao, tipo : String; idusuario : Integer; dataenvio:String);
+    procedure deletarHistorico(id : Integer);
+  end;
+
+var
+  HistoricoDao: THistoricoDao;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses uConexao;
+
+{$R *.dfm}
+
+{ THistoricoDao }
+
+procedure THistoricoDao.deletarHistorico(id: Integer);
+begin
+  sqlDeletar.Params[0].AsInteger := id;
+
+  sqlDeletar.ExecSQL;
+end;
+
+
+
+procedure THistoricoDao.inserirHistorico(cidade, orgao,
+  tipo: String; idusuario : Integer);
+  var
+  today : TDateTime;
+begin
+  today := Now;
+  sqlInserir.Params[0].AsString  := cidade;
+  sqlInserir.Params[1].AsString  := orgao;
+  sqlInserir.Params[2].AsString  := tipo;
+  sqlInserir.Params[3].AsInteger := idusuario;
+
+  sqlInserir.ExecSQL;
+end;
+
+end.

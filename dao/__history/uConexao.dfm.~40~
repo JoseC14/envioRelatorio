@@ -1,0 +1,23 @@
+object Conexao: TConexao
+  OldCreateOrder = False
+  Height = 465
+  Width = 605
+  object Conexao: TFDConnection
+    Params.Strings = (
+      'Database=d6jfk64b504fek'
+      'User_Name=alrsphxsmqvnov'
+      
+        'Password=05bb40d4c9deeeb75ed7fa3eb2b9e7954b06059b97e95884f742d08' +
+        'a7ee14e13'
+      'Server=ec2-3-219-135-162.compute-1.amazonaws.com'
+      'DriverID=PG')
+    Connected = True
+    Left = 384
+    Top = 328
+  end
+  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+    VendorLib = 'libpq.dll'
+    Left = 384
+    Top = 376
+  end
+end

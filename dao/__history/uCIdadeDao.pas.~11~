@@ -1,0 +1,59 @@
+unit uCIdadeDao;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TCidadeDao = class(TDataModule)
+    sqlInserir: TFDQuery;
+    sqlAlterar: TFDQuery;
+    sqlDeletar: TFDQuery;
+    sqlDeletarEmaik: TFDQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure inserirCidade(nome : String);
+    procedure deletarCidade(id : Integer);
+    procedure alterarCidade(nome : String; id : Integer);
+    procedure deletarEmail(id: Integer);
+  end;
+
+var
+  CidadeDao: TCidadeDao;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses uConexao;
+
+{$R *.dfm}
+
+{ TCidadeDao }
+
+procedure TCidadeDao.alterarCidade(nome: String; id: Integer);
+begin
+  sqlAlterar.Params[0].AsString  := nome;
+  sqlAlterar.Params[1].AsInteger := id;
+  sqlAlterar.ExecSQL;
+end;
+
+procedure TCidadeDao.deletarCidade(id: Integer);
+begin
+  sqlDeletar.Params[0].AsInteger := id;
+  sqlDeletar.ExecSQL;
+end;
+
+procedure TCidadeDao.inserirCidade(nome: String);
+begin
+  sqlInserir.Params[0].AsString := nome;
+  sqlInserir.ExecSQL;
+end;
+
+end.
